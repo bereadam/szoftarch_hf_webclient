@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page-header {
+  flex: 0 0 auto;
+  z-index: 100;
+}
+
+.page-content {
+  flex: 1 1 auto;
+  padding: 3vh;
+  overflow-y: auto;
+}

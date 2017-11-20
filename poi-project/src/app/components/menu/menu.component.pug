@@ -1,0 +1,10 @@
+mat-toolbar.mat-elevation-z5(color="primary")
+  .nav-header(routerLink="/test") Test
+  button(mat-button "[matMenuTriggerFor]"="categoryMenu")
+    span Kategóriák
+    mat-icon keyboard_arrow_down
+
+mat-menu("#categoryMenu"="matMenu" "[overlapTrigger]"="false")
+  button(mat-menu-item routerLink="/test") test
+
+
