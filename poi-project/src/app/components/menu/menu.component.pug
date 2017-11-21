@@ -3,8 +3,14 @@ mat-toolbar.mat-elevation-z5(color="primary")
   button(mat-button "[matMenuTriggerFor]"="categoryMenu")
     span Kategóriák
     mat-icon keyboard_arrow_down
+  button(mat-button "[matMenuTriggerFor]"="poiMenu")
+    span Poik
+    mat-icon keyboard_arrow_down
 
 mat-menu("#categoryMenu"="matMenu" "[overlapTrigger]"="false")
   button(mat-menu-item routerLink="/test") test
+  button(mat-menu-item routerLink="/categoryexplorer") catexpl
 
+mat-menu("#poiMenu"="matMenu" "[overlapTrigger]"="false")
+  button(mat-menu-item routerLink="/test") test
 

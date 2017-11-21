@@ -1,0 +1,11 @@
+h1 Kategóriák
+
+mat-card
+  mat-card-content
+    mat-table.table("#table" "[dataSource]"="categoryDatasource")
+      ng-container(matColumnDef="name")
+        mat-header-cell("*matHeaderCellDef") name
+        mat-cell("*matCellDef"="let element" "(click)"="enterCategory(element)") {{element.name}}
+      mat-header-row("*matHeaderRowDef"="displayedColumns")
+      mat-row("*matRowDef"="let row; columns: displayedColumns;")
+    button#addcategory(mat-raised-button color="primary" "(click)"="addCategory()") Kategória hozzáadása
