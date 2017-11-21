@@ -25,7 +25,7 @@ export class CategoryExplorerComponent implements OnInit {
   }
 
   enterCategory(new_category: Category) {
-    this.categoryService.loadCategories(this.currentCategory, new_category);
+    this.categoryService.loadCategories(new_category);
   }
 
   addCategory() {

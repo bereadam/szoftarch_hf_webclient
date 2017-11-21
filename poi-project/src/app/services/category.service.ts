@@ -28,18 +28,26 @@ export class CategoryService {
     }
   }
 
-  loadCategories(current_category: Category = null, category: Category = null) {
+  loadCategories(category: Category = null) {
     let url;
     if (category && category.id) {
       const result = Array<Category>();
-      if (current_category) {
-        current_category.name = '..';
-        result.push(current_category);
+
+      if (category.parent) {
+        url = `${environment.baseurl}${environment.categorypath}${category.parent}/`
+        this.http.get(url, {headers: this.headers}).subscribe(rawcategory => {
+          const parent = this.parseCategory(rawcategory);
+          parent.name = '..';
+          result.push(parent);
+          this.categories.next(result);
+        });
       } else {
         const root = new Category();
         root.name = '..';
         result.push(root);
+        this.categories.next(result);
       }
+
       category.subcategories.map(subcategoryID => {
         url = `${environment.baseurl}${environment.categorypath}${subcategoryID}/`;
         this.http.get(url, {headers: this.headers}).subscribe(rawcategory => {
@@ -48,6 +56,7 @@ export class CategoryService {
         });
       });
       this.categories.next(result);
+
     } else {
       url = `${environment.baseurl}${environment.categorypath}`;
 
