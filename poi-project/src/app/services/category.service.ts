@@ -28,6 +28,44 @@ export class CategoryService {
     }
   }
 
+  create(new_category) {
+    const payload = {name: new_category.name};
+    this.http.post(`${environment.baseurl}${environment.categorypath}`,
+      JSON.stringify(payload),
+      {headers: this.headers}).subscribe(response => {
+      if (new_category.parent) {
+        new_category.id = response['id'];
+        this.setParent(new_category);
+      }
+    });
+  }
+
+  delete(category) {
+    this.http.delete(`${environment.baseurl}${environment.categorypath}${category.id}/`).subscribe(response => {
+        const cats = this.categories.getValue()
+        let i = cats.indexOf(category);
+        if (i !== -1) {
+          cats.splice(i, 1);
+          this.categories.next(cats);
+        }
+      });
+  }
+
+  setParent(new_category) {
+    const payload = {
+      parentID: new_category.parent,
+      subcategoryId: new_category.id
+    };
+    this.http.post(`${environment.baseurl}${environment.addsubcategorypath}`, JSON.stringify(payload),
+      {headers: this.headers}).subscribe(response => {
+
+      const cats = this.categories.getValue();
+      cats.push(new_category);
+      this.categories.next(cats);
+      console.log(response);
+    });
+  }
+
   loadCategories(category: Category = null) {
     let url;
     if (category && category.id) {

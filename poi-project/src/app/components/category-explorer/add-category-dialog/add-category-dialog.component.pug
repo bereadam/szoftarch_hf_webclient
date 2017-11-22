@@ -1,0 +1,4 @@
+form("#addCategoryForm"="ngForm" "(submit)"="dialogRef.close(data)")
+  mat-form-field
+    input(name="name" matInput "[(ngModel)]"="data.name" placeholder="name" required)
+  button(mat-raised-button color="primary" type="submit") Mentés

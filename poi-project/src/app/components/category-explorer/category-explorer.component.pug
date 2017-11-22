@@ -6,6 +6,11 @@ mat-card
       ng-container(matColumnDef="name")
         mat-header-cell("*matHeaderCellDef") name
         mat-cell("*matCellDef"="let element" "(click)"="enterCategory(element)") {{element.name}}
+      ng-container(matColumnDef="delete")
+        mat-header-cell("*matHeaderCellDef") Törlés
+        mat-cell("*matCellDef"="let element")
+          button(mat-icon-button "(click)"="deleteCategory(element)")
+            mat-icon.mat-12(color="primary") delete_forever
       mat-header-row("*matHeaderRowDef"="displayedColumns")
       mat-row("*matRowDef"="let row; columns: displayedColumns;")
     button#addcategory(mat-raised-button color="primary" "(click)"="addCategory()") Kategória hozzáadása

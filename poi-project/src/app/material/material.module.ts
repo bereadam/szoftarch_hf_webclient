@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatCardModule,
-  MatIconModule,
+  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule,
+  MatIconModule, MatInputModule,
   MatMenuModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
@@ -18,6 +18,9 @@ import {
     MatIconModule,
     MatTableModule,
     MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     CommonModule,
@@ -28,6 +31,9 @@ import {
     MatIconModule,
     MatTableModule,
     MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class MaterialModule {

@@ -8,7 +8,10 @@ import {TestComponent} from './components/test/test.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CategoryExplorerComponent} from './components/category-explorer/category-explorer.component';
 import {CategoryService} from './services/category.service';
-import {PoiService} from './services/poi.service'
+import {PoiService} from './services/poi.service';
+import { AddCategoryDialogComponent } from './components/category-explorer/add-category-dialog/add-category-dialog.component'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -16,12 +19,16 @@ import {PoiService} from './services/poi.service'
     AppComponent,
     MenuComponent,
     TestComponent,
-    CategoryExplorerComponent
+    CategoryExplorerComponent,
+    AddCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -46,7 +53,10 @@ import {PoiService} from './services/poi.service'
     CategoryService,
     PoiService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AddCategoryDialogComponent,
+  ]
 })
 export class AppModule {
 }
