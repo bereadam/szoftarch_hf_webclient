@@ -1,0 +1,10 @@
+form("#addPoiForm"="ngForm" "(submit)"="dialogRef.close(data)")
+  mat-form-field
+    input(name="name" matInput "[(ngModel)]"="data.name" placeholder="name" required)
+  mat-form-field
+    input(name="lat" type="number" matInput "[(ngModel)]"="data.lat" placeholder="lat" required)
+  mat-form-field
+    input(name="lon" type="number" matInput "[(ngModel)]"="data.lon" placeholder="lon" required)
+  mat-form-field
+    input(name="desc" matInput "[(ngModel)]"="data.desc" placeholder="desc" required)
+  button(mat-raised-button color="primary" type="submit") Mentés

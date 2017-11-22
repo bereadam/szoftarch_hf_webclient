@@ -46,4 +46,27 @@ export class PoiService {
     }
   }
 
+  setParent(category: Category, poi: Poi) {
+    const payload = {
+      parentCategoryID: category.id,
+      poiId: poi.id
+    };
+    this.http.post(`${environment.baseurl}${environment.addpoipath}`, JSON.stringify(payload),
+      {headers: this.headers}).subscribe(response => {
+
+      const pois = this.pois.getValue();
+      pois.push(poi);
+      this.pois.next(pois);
+    });
+  }
+
+  create(category: Category, poi: Poi) {
+    if (poi) {
+      this.http.post(`${environment.baseurl}${environment.poipath}`, JSON.stringify(poi),
+        {headers: this.headers}).subscribe(response => {
+          poi.id = response['id'];
+          this.setParent(category, poi);
+      });
+    }
+  }
 }

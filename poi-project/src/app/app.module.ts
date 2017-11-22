@@ -12,6 +12,8 @@ import {PoiService} from './services/poi.service';
 import { AddCategoryDialogComponent } from './components/category-explorer/add-category-dialog/add-category-dialog.component'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AddPoiDialogComponent } from './components/category-explorer/add-poi-dialog/add-poi-dialog.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MenuComponent,
     TestComponent,
     CategoryExplorerComponent,
-    AddCategoryDialogComponent
+    AddCategoryDialogComponent,
+    AddPoiDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   bootstrap: [AppComponent],
   entryComponents: [
     AddCategoryDialogComponent,
+    AddPoiDialogComponent,
   ]
 })
 export class AppModule {

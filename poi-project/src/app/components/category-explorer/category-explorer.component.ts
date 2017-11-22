@@ -6,6 +6,8 @@ import {Category} from '../../models/category';
 import {AddCategoryDialogComponent} from './add-category-dialog/add-category-dialog.component';
 import {MatDialog} from '@angular/material';
 import {PoiDataSource} from './poi.data-source';
+import {Poi} from '../../models/poi';
+import {AddPoiDialogComponent} from './add-poi-dialog/add-poi-dialog.component';
 
 @Component({
   selector: 'app-category-explorer',
@@ -55,6 +57,15 @@ export class CategoryExplorerComponent implements OnInit {
       new_category.pois = Array<number>();
 
       this.categoryService.create(new_category);
+    });
+  }
+
+  addPoi() {
+    const dialogRef = this.dialog.open(AddPoiDialogComponent, {
+      data: new Poi()
+    });
+    dialogRef.afterClosed().subscribe(new_poi => {
+      this.poiService.create(this.currentCategory, new_poi);
     });
   }
 
