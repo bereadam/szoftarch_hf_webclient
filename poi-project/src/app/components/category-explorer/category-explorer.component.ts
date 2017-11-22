@@ -5,6 +5,7 @@ import {CategoryDataSource} from './category.data-source';
 import {Category} from '../../models/category';
 import {AddCategoryDialogComponent} from './add-category-dialog/add-category-dialog.component';
 import {MatDialog} from '@angular/material';
+import {PoiDataSource} from './poi.data-source';
 
 @Component({
   selector: 'app-category-explorer',
@@ -14,7 +15,10 @@ import {MatDialog} from '@angular/material';
 export class CategoryExplorerComponent implements OnInit {
 
   categoryDatasource: CategoryDataSource;
-  displayedColumns = ['name', 'delete'];
+  displayedColumnsCategory = ['name', 'delete'];
+
+  poiDatasource: PoiDataSource;
+  displayedColumnsPoi = ['name'];
 
   currentCategory: Category;
 
@@ -26,11 +30,13 @@ export class CategoryExplorerComponent implements OnInit {
 
   ngOnInit() {
     this.categoryDatasource = new CategoryDataSource(this.categoryService);
+    this.poiDatasource = new PoiDataSource(this.poiService);
   }
 
   enterCategory(new_category: Category) {
     this.categoryService.loadCategories(new_category);
     this.currentCategory = new_category;
+    this.poiService.loadPois(this.currentCategory);
   }
 
   deleteCategory(category) {

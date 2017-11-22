@@ -2,7 +2,7 @@ h1 Kategóriák
 
 mat-card
   mat-card-content
-    mat-table.table("#table" "[dataSource]"="categoryDatasource")
+    mat-table.table("#categoryTable" "[dataSource]"="categoryDatasource")
       ng-container(matColumnDef="name")
         mat-header-cell("*matHeaderCellDef") name
         mat-cell("*matCellDef"="let element" "(click)"="enterCategory(element)") {{element.name}}
@@ -11,6 +11,17 @@ mat-card
         mat-cell("*matCellDef"="let element")
           button(mat-icon-button "(click)"="deleteCategory(element)")
             mat-icon.mat-12(color="primary") delete_forever
-      mat-header-row("*matHeaderRowDef"="displayedColumns")
-      mat-row("*matRowDef"="let row; columns: displayedColumns;")
+      mat-header-row("*matHeaderRowDef"="displayedColumnsCategory")
+      mat-row("*matRowDef"="let row; columns: displayedColumnsCategory;")
     button#addcategory(mat-raised-button color="primary" "(click)"="addCategory()") Kategória hozzáadása
+
+h1 Poik
+
+mat-card
+  mat-card-content
+    mat-table.table("#poiTable" "[dataSource]"="poiDatasource")
+      ng-container(matColumnDef="name")
+        mat-header-cell("*matHeaderCellDef") name
+        mat-cell("*matCellDef"="let element") {{element.name}}
+      mat-header-row("*matHeaderRowDef"="displayedColumnsPoi")
+      mat-row("*matRowDef"="let row; columns: displayedColumnsPoi;")
