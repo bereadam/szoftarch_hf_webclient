@@ -44,19 +44,6 @@ export class PoiService {
     } else {
       this.pois.next([]);
     }
-
-
-
-    // const url = `${environment.baseurl}${environment.poipath}`;
-    //
-    // this.http.get(url, {headers: this.headers}).subscribe(rawpois => {
-    //   const x = rawpois as any[];
-    //   this.pois.next(
-    //     x.map(rawpoi => {
-    //       return this.parsePoi(rawpoi);
-    //     })
-    //   );
-    // });
   }
 
 }
