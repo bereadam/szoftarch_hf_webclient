@@ -36,6 +36,10 @@ export class CategoryService {
       if (new_category.parent) {
         new_category.id = response['id'];
         this.setParent(new_category);
+      } else {
+        const cats = this.categories.getValue();
+        cats.push(new_category);
+        this.categories.next(cats);
       }
     });
   }
@@ -43,7 +47,7 @@ export class CategoryService {
   delete(category) {
     this.http.delete(`${environment.baseurl}${environment.categorypath}${category.id}/`).subscribe(response => {
         const cats = this.categories.getValue()
-        let i = cats.indexOf(category);
+        const i = cats.indexOf(category);
         if (i !== -1) {
           cats.splice(i, 1);
           this.categories.next(cats);
@@ -62,7 +66,6 @@ export class CategoryService {
       const cats = this.categories.getValue();
       cats.push(new_category);
       this.categories.next(cats);
-      console.log(response);
     });
   }
 

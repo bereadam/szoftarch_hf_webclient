@@ -42,7 +42,9 @@ export class CategoryExplorerComponent implements OnInit {
       data: new Category()
     });
     dialogRef.afterClosed().subscribe(new_category => {
-      new_category.parent = this.currentCategory.id;
+      if (this.currentCategory) {
+        new_category.parent = this.currentCategory.id;
+      }
       new_category.subcategories = Array<number>();
       new_category.pois = Array<number>();
 
