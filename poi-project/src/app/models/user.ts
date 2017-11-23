@@ -1,7 +1,7 @@
 export class User {
-  token: string;
 
-  constructor(token: string) {
-    this.token = token;
-  }
+  id: number;
+  email: string;
+  is_staff: boolean;
+  is_superuser: boolean;
 }

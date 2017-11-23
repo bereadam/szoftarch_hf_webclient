@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material';
 import {PoiDataSource} from './poi.data-source';
 import {Poi} from '../../models/poi';
 import {AddPoiDialogComponent} from './add-poi-dialog/add-poi-dialog.component';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-category-explorer',
@@ -26,6 +27,7 @@ export class CategoryExplorerComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    private authService: AuthService,
     private categoryService: CategoryService,
     private poiService: PoiService) {
   }
@@ -34,6 +36,10 @@ export class CategoryExplorerComponent implements OnInit {
     this.categoryDatasource = new CategoryDataSource(this.categoryService);
     this.poiDatasource = new PoiDataSource(this.poiService);
     this.categoryService.loadCategories();
+  }
+
+  is_admin() {
+    return this.authService.user_is_admin();
   }
 
   enterCategory(new_category: Category) {

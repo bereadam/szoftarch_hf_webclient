@@ -8,6 +8,8 @@ import {AuthService} from '../../services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
+
+
   constructor(private authService: AuthService) {
   }
 
@@ -16,6 +18,10 @@ export class MenuComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  is_superuser() {
+    return this.authService.user_is_superuser();
   }
 
 }

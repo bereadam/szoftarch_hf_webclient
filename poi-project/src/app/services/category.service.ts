@@ -51,7 +51,8 @@ export class CategoryService {
   }
 
   delete(category) {
-    this.http.delete(`${environment.baseurl}${environment.categorypath}${category.id}/`).subscribe(response => {
+    this.http.delete(`${environment.baseurl}${environment.categorypath}${category.id}/`,
+      {headers: this.get_headers()}).subscribe(response => {
         const cats = this.categories.getValue()
         const i = cats.indexOf(category);
         if (i !== -1) {

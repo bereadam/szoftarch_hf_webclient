@@ -10,11 +10,11 @@
         ng-container(matColumnDef="delete")
           mat-header-cell("*matHeaderCellDef") Törlés
           mat-cell("*matCellDef"="let element")
-            button(*ngIf="element.name != '..'" mat-icon-button "(click)"="deleteCategory(element)")
+            button(*ngIf="element.name != '..' && is_admin()" mat-icon-button "(click)"="deleteCategory(element)")
               mat-icon.mat-12(color="primary") delete_forever
         mat-header-row("*matHeaderRowDef"="displayedColumnsCategory")
         mat-row("*matRowDef"="let row; columns: displayedColumnsCategory;")
-      button#addcategory(mat-raised-button color="primary" "(click)"="addCategory()") Kategória hozzáadása
+      button#addcategory(*ngIf="is_admin()" mat-raised-button color="primary" "(click)"="addCategory()") Kategória hozzáadása
 
 .pois(*ngIf="currentCategory && currentCategory.id")
   h1 Poik

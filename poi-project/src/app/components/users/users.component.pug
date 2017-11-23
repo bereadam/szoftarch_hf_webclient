@@ -1,0 +1,18 @@
+.users
+  h1 Felhasználók
+
+  mat-card
+    mat-card-content
+      mat-table.table("#userTable" "[dataSource]"="datasource")
+        ng-container(matColumnDef="email")
+          mat-header-cell("*matHeaderCellDef") Email
+          mat-cell("*matCellDef"="let element") {{element.email}}
+        ng-container(matColumnDef="admin")
+          mat-header-cell("*matHeaderCellDef") Admin
+          mat-cell("*matCellDef"="let element")
+            mat-checkbox(name="is_admin" "[checked]"="element.is_staff", color="primary" "(change)"="set_admin(element, !element.is_staff)" )
+        ng-container(matColumnDef="superadmin")
+          mat-header-cell("*matHeaderCellDef") Superadmin
+          mat-cell("*matCellDef"="let element") {{element.is_superuser}}
+        mat-header-row("*matHeaderRowDef"="displayedColumns")
+        mat-row("*matRowDef"="let row; columns: displayedColumns;")

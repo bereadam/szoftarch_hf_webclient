@@ -1,5 +1,5 @@
 mat-toolbar.mat-elevation-z5(color="primary")
-  .nav-header(routerLink="/login") PoiAdmin
+  .nav-header(routerLink="/login") PoiPage
   .navbuttons(*ngIf="authService.user_is_logged_in()")
     button(mat-button "[matMenuTriggerFor]"="menu")
       span Menu
@@ -7,5 +7,5 @@ mat-toolbar.mat-elevation-z5(color="primary")
 
 mat-menu("#menu"="matMenu" "[overlapTrigger]"="false")
   button(mat-menu-item routerLink="/categoryexplorer") Kategóriák böngészése
+  button(*ngIf="is_superuser()" mat-menu-item routerLink="/users") Felhasználók
   button(mat-menu-item routerLink="/login" "(click)"="logout()") Kijelentkezés
-

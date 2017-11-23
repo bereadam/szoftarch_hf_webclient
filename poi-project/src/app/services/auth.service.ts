@@ -30,6 +30,14 @@ export class AuthService {
     return false;
   }
 
+  user_is_admin() {
+    return localStorage.getItem('is_admin') === 'true';
+  }
+
+  user_is_superuser() {
+    return localStorage.getItem('is_superuser') === 'true';
+  }
+
   login(email, password) {
     const payload = {
       email: email,
@@ -40,6 +48,8 @@ export class AuthService {
       {headers: this.get_headers()}).subscribe(response => {
       if (response['sessionID']) {
         localStorage.setItem('currentUser', response['sessionID']);
+        localStorage.setItem('is_admin', response['is_admin']);
+        localStorage.setItem('is_superuser', response['is_superuser']);
         this.router.navigate(['/categoryexplorer']);
       }
     });
@@ -49,5 +59,7 @@ export class AuthService {
     this.http.get(`${environment.baseurl}${environment.logoutpath}`,
       {headers: this.get_headers(true)})
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('is_admin');
+    localStorage.removeItem('is_superuser');
   }
 }

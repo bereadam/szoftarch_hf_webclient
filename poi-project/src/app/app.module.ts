@@ -15,6 +15,8 @@ import { AddPoiDialogComponent } from './components/category-explorer/add-poi-di
 import { LoginComponent } from './components/login/login.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './auth.guard';
+import { UsersComponent } from './components/users/users.component';
+import {UsersService} from './services/users.service';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import {AuthGuard} from './auth.guard';
     CategoryExplorerComponent,
     AddCategoryDialogComponent,
     AddPoiDialogComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,11 @@ import {AuthGuard} from './auth.guard';
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [AuthGuard],
       }
     ]),
   ],
@@ -55,6 +63,7 @@ import {AuthGuard} from './auth.guard';
     PoiService,
     AuthService,
     AuthGuard,
+    UsersService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

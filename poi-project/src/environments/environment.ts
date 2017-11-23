@@ -11,5 +11,8 @@ export const environment = {
   addsubcategorypath: 'category/addSubcategory',
   addpoipath: 'category/addPoi',
   loginpath: 'login',
-  logoutpath: 'logout'
+  logoutpath: 'logout',
+  userspath: 'users/',
+  toadminpath: 'toAdmin/',
+  removeadminpath: 'removeAdmin/'
 };
