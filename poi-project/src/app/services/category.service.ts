@@ -9,11 +9,17 @@ import {Category} from '../models/category';
 export class CategoryService {
 
   categories: BehaviorSubject<Category[]>;
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
     this.categories = <BehaviorSubject<Category[]>> new BehaviorSubject([]);
     this.loadCategories();
+  }
+
+  private get_headers() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('currentUser')
+    });
   }
 
   parseCategory(category): Category {
@@ -32,7 +38,7 @@ export class CategoryService {
     const payload = {name: new_category.name};
     this.http.post(`${environment.baseurl}${environment.categorypath}`,
       JSON.stringify(payload),
-      {headers: this.headers}).subscribe(response => {
+      {headers: this.get_headers()}).subscribe(response => {
       if (new_category.parent) {
         new_category.id = response['id'];
         this.setParent(new_category);
@@ -61,7 +67,7 @@ export class CategoryService {
       subcategoryId: new_category.id
     };
     this.http.post(`${environment.baseurl}${environment.addsubcategorypath}`, JSON.stringify(payload),
-      {headers: this.headers}).subscribe(response => {
+      {headers: this.get_headers()}).subscribe(response => {
 
       const cats = this.categories.getValue();
       cats.push(new_category);
@@ -76,7 +82,7 @@ export class CategoryService {
 
       if (category.parent) {
         url = `${environment.baseurl}${environment.categorypath}${category.parent}/`
-        this.http.get(url, {headers: this.headers}).subscribe(rawcategory => {
+        this.http.get(url, {headers: this.get_headers()}).subscribe(rawcategory => {
           const parent = this.parseCategory(rawcategory);
           parent.name = '..';
           result.push(parent);
@@ -91,7 +97,7 @@ export class CategoryService {
 
       category.subcategories.map(subcategoryID => {
         url = `${environment.baseurl}${environment.categorypath}${subcategoryID}/`;
-        this.http.get(url, {headers: this.headers}).subscribe(rawcategory => {
+        this.http.get(url, {headers: this.get_headers()}).subscribe(rawcategory => {
           result.push(this.parseCategory(rawcategory));
           this.categories.next(result);
         });
@@ -101,7 +107,7 @@ export class CategoryService {
     } else {
       url = `${environment.baseurl}${environment.categorypath}`;
 
-      this.http.get(url, {headers: this.headers}).subscribe(
+      this.http.get(url, {headers: this.get_headers()}).subscribe(
         rawcategories => {
           const x = rawcategories as any[];
           this.categories.next(

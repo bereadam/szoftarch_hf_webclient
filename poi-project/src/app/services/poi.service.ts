@@ -9,11 +9,17 @@ import {Category} from '../models/category';
 export class PoiService {
 
   pois: BehaviorSubject<Poi[]>;
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
     this.pois = <BehaviorSubject<Poi[]>> new BehaviorSubject([]);
     this.loadPois();
+  }
+
+  private get_headers() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('currentUser')
+    });
   }
 
   parsePoi(rawpoi): Poi {
@@ -35,7 +41,7 @@ export class PoiService {
       const result = Array<Poi>();
       category.pois.map(poiID => {
         url = `${environment.baseurl}${environment.poipath}${poiID}/`;
-        this.http.get(url, {headers: this.headers}).subscribe(rawpoi => {
+        this.http.get(url, {headers: this.get_headers()}).subscribe(rawpoi => {
           result.push(this.parsePoi(rawpoi));
           this.pois.next(result);
         });
@@ -52,7 +58,7 @@ export class PoiService {
       poiId: poi.id
     };
     this.http.post(`${environment.baseurl}${environment.addpoipath}`, JSON.stringify(payload),
-      {headers: this.headers}).subscribe(response => {
+      {headers: this.get_headers()}).subscribe(response => {
 
       const pois = this.pois.getValue();
       pois.push(poi);
@@ -63,7 +69,7 @@ export class PoiService {
   create(category: Category, poi: Poi) {
     if (poi) {
       this.http.post(`${environment.baseurl}${environment.poipath}`, JSON.stringify(poi),
-        {headers: this.headers}).subscribe(response => {
+        {headers: this.get_headers()}).subscribe(response => {
           poi.id = response['id'];
           this.setParent(category, poi);
       });

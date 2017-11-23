@@ -33,6 +33,7 @@ export class CategoryExplorerComponent implements OnInit {
   ngOnInit() {
     this.categoryDatasource = new CategoryDataSource(this.categoryService);
     this.poiDatasource = new PoiDataSource(this.poiService);
+    this.categoryService.loadCategories();
   }
 
   enterCategory(new_category: Category) {

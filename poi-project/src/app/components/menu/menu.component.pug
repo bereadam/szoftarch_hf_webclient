@@ -1,16 +1,11 @@
 mat-toolbar.mat-elevation-z5(color="primary")
-  .nav-header(routerLink="/test") Test
-  button(mat-button "[matMenuTriggerFor]"="categoryMenu")
-    span Kategóriák
-    mat-icon keyboard_arrow_down
-  button(mat-button "[matMenuTriggerFor]"="poiMenu")
-    span Poik
-    mat-icon keyboard_arrow_down
+  .nav-header(routerLink="/login") PoiAdmin
+  .navbuttons(*ngIf="authService.user_is_logged_in()")
+    button(mat-button "[matMenuTriggerFor]"="menu")
+      span Menu
+      mat-icon keyboard_arrow_down
 
-mat-menu("#categoryMenu"="matMenu" "[overlapTrigger]"="false")
-  button(mat-menu-item routerLink="/test") test
-  button(mat-menu-item routerLink="/categoryexplorer") catexpl
-
-mat-menu("#poiMenu"="matMenu" "[overlapTrigger]"="false")
-  button(mat-menu-item routerLink="/test") test
+mat-menu("#menu"="matMenu" "[overlapTrigger]"="false")
+  button(mat-menu-item routerLink="/categoryexplorer") Kategóriák böngészése
+  button(mat-menu-item routerLink="/login" "(click)"="logout()") Kijelentkezés
 

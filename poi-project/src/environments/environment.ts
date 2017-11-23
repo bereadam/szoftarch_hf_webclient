@@ -9,5 +9,7 @@ export const environment = {
   categorypath: 'category/',
   poipath: 'poi/',
   addsubcategorypath: 'category/addSubcategory',
-  addpoipath: 'category/addPoi'
+  addpoipath: 'category/addPoi',
+  loginpath: 'login',
+  logoutpath: 'logout'
 };

@@ -4,7 +4,6 @@ import {AppComponent} from './app.component';
 import {MaterialModule} from './material/material.module';
 import {MenuComponent} from './components/menu/menu.component';
 import {RouterModule} from '@angular/router';
-import {TestComponent} from './components/test/test.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CategoryExplorerComponent} from './components/category-explorer/category-explorer.component';
 import {CategoryService} from './services/category.service';
@@ -14,13 +13,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AddPoiDialogComponent } from './components/category-explorer/add-poi-dialog/add-poi-dialog.component';
 import { LoginComponent } from './components/login/login.component';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './auth.guard';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    TestComponent,
     CategoryExplorerComponent,
     AddCategoryDialogComponent,
     AddPoiDialogComponent,
@@ -36,26 +36,25 @@ import { LoginComponent } from './components/login/login.component';
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/test',
+        redirectTo: '/login',
         pathMatch: 'full'
-      },
-      {
-        path: 'test',
-        component: TestComponent,
       },
       {
         path: 'categoryexplorer',
         component: CategoryExplorerComponent,
+        canActivate: [AuthGuard],
       },
       {
-        path: 'categoryexplorer/:id',
-        component: CategoryExplorerComponent,
+        path: 'login',
+        component: LoginComponent,
       }
     ]),
   ],
   providers: [
     CategoryService,
     PoiService,
+    AuthService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

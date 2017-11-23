@@ -1,0 +1,6 @@
+form("#loginForm"="ngForm" "(submit)"="login(email, password)")
+  mat-form-field
+    input(name="email" matInput "[(ngModel)]"="email" placeholder="email" required)
+  mat-form-field
+    input(name="password" type="password" matInput "[(ngModel)]"="password" placeholder="password" required)
+  button(mat-raised-button color="primary" type="submit") Belépés
